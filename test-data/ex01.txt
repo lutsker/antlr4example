@@ -1,0 +1,26 @@
+
+
+
+
+HOSTS {
+
+HOST one = {}
+HOST two = {}
+HOST three = {
+name = "../cmp";
+}
+HOST five = {   }
+
+}
+
+HOSTS { }
+
+HOSTS {
+
+HOST a324_8 = {
+name = "jjj";
+}
+}
+
+
+

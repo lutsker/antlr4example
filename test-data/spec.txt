@@ -1,0 +1,14 @@
+HOSTS {
+	HOST node1 = {
+		name = "hello";
+		attr = "world!";
+	}
+
+	HOST node2_1 = {
+		name = "";
+		attr = "../../someplace/somefile.cmp";
+	}
+
+	HOST node2_2 = {}
+}
+
