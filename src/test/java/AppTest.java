@@ -39,15 +39,35 @@ public class AppTest extends TestCase {
         return simpleParser;
     }
 
-
     public void testLexerEvaluatesEmptyHOSTS() {
         SimpleParser parser = setup("HOSTS {}");
         SimpleParser.SimpleContext context = parser.simple();
         TokenStream recognized_tokens = parser.getTokenStream();
 
         assertEquals(SimpleLexer.KWHOSTS, recognized_tokens.get(0).getType());
-        assertEquals(SimpleLexer.BLOCKOPEN, recognized_tokens.get(1).getType());
-        assertEquals(SimpleLexer.BLOCKCLOSE, recognized_tokens.get(2).getType());
+        assertEquals(SimpleLexer.BO, recognized_tokens.get(1).getType());
+        assertEquals(SimpleLexer.BC, recognized_tokens.get(2).getType());
     }
+
+    public void testLexerRecognizesString() {
+        SimpleParser parser = setup("HOSTS { HOST name_a1 = { val = \"../../myfolder/myfile.com\"; } } " );
+        SimpleParser.HostdefContext context = parser.hostdef();
+        TokenStream recognized_tokens = parser.getTokenStream();
+        assertEquals(SimpleLexer.STRING, recognized_tokens.get(8).getType() );
+    }
+
+    public void testLexerInterpretsEscapedQuotesAsString() {
+        SimpleParser parser = setup("HOSTS { HOST name_a1 = { val = \"../../\"m\"yfolder/myfile.com\"; } } " );
+        SimpleParser.HostdefContext context = parser.hostdef();
+        TokenStream recognized_tokens = parser.getTokenStream();
+        assertEquals(SimpleLexer.STRING, recognized_tokens.get(8).getType() );
+    }
+
+    public void testNumberOfHostsIs2() {
+        SimpleParser parser = setup("HOSTS { HOST node = {} HOST node = {}}");
+        SimpleParser.HostdefContext context = parser.hostdef();
+        assertEquals(2, context.KWHOST().size());
+    }
+
 
 }

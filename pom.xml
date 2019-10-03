@@ -58,13 +58,13 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-<!--
+
                     <archive>
                         <manifest>
-                            <mainClass></mainClass>
+                            <mainClass>org.vital.examples.SimpleParser.App</mainClass>
                         </manifest>
                     </archive>
--->
+
                 </configuration>
                 <executions>
                     <execution>
